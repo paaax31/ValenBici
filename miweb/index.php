@@ -4,122 +4,140 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Disponibilidad de ValenBisi</title>
+
 <style>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 30px 20px;
-    background-color: #fff5f8;
-    color: #333;
-}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 30px 20px;
+        background-color: #fff5f8;
+        color: #333;
+    }
+    
+    h1 {
+        color: #4a2635;
+        text-align: center;
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    table {
+        width: 90%;
+        margin: 0 auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(190, 24, 93, 0.08);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #fbcfe8;
+    }
+    
+    th {
+        background-color: #be185d;
+        color: #ffffff;
+        padding: 14px 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #9d174d;
+    }
+    
+    td {
+        padding: 12px 16px;
+        text-align: center;
+        border-bottom: 1px solid #fce7f3;
+        font-size: 0.95rem;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #fff1f5;
+    }
+   
+    tr:hover {
+        background-color: #fce7f3;
+        transition: background-color 0.2s ease;
+    }
+   
+    .status-open {
+        color: #db2777;
+        font-weight: bold;
+    }
 
-h1 {
-    color: #4a2635;
-    text-align: center;
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+    .status-closed {
+        color: #c0392b;
+        font-weight: bold;
+    }
+    
+    .container-btn {
+        text-align: center;
+        margin-top: 35px;
+    }
 
-table {
-    width: 90%;
-    margin: 0 auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px rgba(190, 24, 93, 0.08);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #fbcfe8;
-}
+    .btn-mapa {
+        display: inline-block;
+        width: 90%; 
+        box-sizing: border-box;
+        padding: 16px;
+        background-color: #db2777;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(219, 39, 119, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-mapa:hover {
+        background-color: #be185d;
+        box-shadow: 0 6px 12px rgba(219, 39, 119, 0.3);
+        transform: translateY(-2px); 
+    }
 
-th {
-    background-color: #be185d;
-    color: #ffffff;
-    padding: 14px 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid #9d174d;
-}
+    /* Estilos para los botones de idioma modernos */
+    .lang-container {
+        text-align: center;
+        margin-bottom: 25px;
+    }
 
-td {
-    padding: 12px 16px;
-    text-align: center;
-    border-bottom: 1px solid #fce7f3;
-    font-size: 0.95rem;
-}
+    .btn-lang {
+        background-color: #ffffff;
+        border: 2px solid #db2777;
+        color: #db2777;
+        padding: 8px 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 4px;
+        margin: 0 5px;
+        transition: all 0.2s;
+    }
 
-/* Líneas alternas con rosa muy suave */
-tr:nth-child(even) {
-    background-color: #fff1f5;
-}
-
-/* Efecto hover rosa suave */
-tr:hover {
-    background-color: #fce7f3;
-    transition: background-color 0.2s ease;
-}
-
-/* Indicadores de estado visuales */
-.status-open {
-    color: #db2777;
-    font-weight: bold;
-}
-
-.status-closed {
-    color: #c0392b;
-    font-weight: bold;
-}
-
-.container-btn {
-    text-align: center;
-    margin-top: 35px;
-}
-
-.btn-mapa {
-    display: inline-block;
-    width: 90%;
-    box-sizing: border-box;
-    padding: 16px;
-    background-color: #db2777;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 6px;
-    box-shadow: 0 4px 6px rgba(219, 39, 119, 0.2);
-    transition: all 0.3s ease;
-}
-
-.btn-mapa:hover {
-    background-color: #be185d;
-    box-shadow: 0 6px 12px rgba(219, 39, 119, 0.3);
-    transform: translateY(-2px);
-}
+    .btn-lang:hover {
+        background-color: #db2777;
+        color: white;
+    }
 </style>
 </head>
+
 <body>
+
+<div class="lang-container">
+    <button class="btn-lang" onclick="changeLanguage('es')">Español</button>
+    <button class="btn-lang" onclick="changeLanguage('en')">English</button>
+</div>
+
 <h1>Disponibilidad de ValenBisi</h1>
+
 <?php
-    // Pedimos directamente la geometría en WGS84 (EPSG:4326), que es el formato usado por la mayoría de mapas web:
-    // x = longitud, y = latitud.
     $baseUrl = "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/228/query?where=1=1&outFields=*&returnGeometry=true&outSR=4326&f=json";
 
-    /**
-     * Convierte coordenadas UTM ETRS89 / zona 30N (EPSG:25830) a WGS84 (EPSG:4326).
-     *
-     * La capa actual de ValenBisi trabaja en EPSG:25830. Aunque arriba solicitamos outSR=4326,
-     * mantenemos esta función como respaldo profesional por si la API devolviera de nuevo X/Y proyectadas.
-     *
-     * @return array{latitude: float, longitude: float}
-     */
     function epsg25830ToWgs84(float $easting, float $northing): array
     {
-        // Parámetros GRS80 / ETRS89. Para este uso urbano, la diferencia práctica con WGS84 es despreciable.
         $a = 6378137.0;
         $f = 1 / 298.257222101;
         $k0 = 0.9996;
@@ -141,11 +159,7 @@ tr:hover {
         $j3 = 151 * pow($e1, 3) / 96;
         $j4 = 1097 * pow($e1, 4) / 512;
 
-        $fp = $mu
-            + $j1 * sin(2 * $mu)
-            + $j2 * sin(4 * $mu)
-            + $j3 * sin(6 * $mu)
-            + $j4 * sin(8 * $mu);
+        $fp = $mu + $j1 * sin(2 * $mu) + $j2 * sin(4 * $mu) + $j3 * sin(6 * $mu) + $j4 * sin(8 * $mu);
 
         $sinFp = sin($fp);
         $cosFp = cos($fp);
@@ -176,19 +190,11 @@ tr:hover {
         ];
     }
 
-    /**
-     * Normaliza la geometría de ValenBisi para que el JSON siempre tenga latitude/longitude.
-     * Si la API devuelve EPSG:4326, usa x/y directamente. Si devuelve EPSG:25830, convierte desde UTM.
-     *
-     * @param array<string, mixed> $geometry
-     * @return array{latitude: float, longitude: float, source_x: float, source_y: float}
-     */
     function normalizeValenbisiGeometry(array $geometry): array
     {
         $x = isset($geometry['x']) ? (float)$geometry['x'] : 0.0;
         $y = isset($geometry['y']) ? (float)$geometry['y'] : 0.0;
 
-        // En EPSG:4326 Valencia estará aproximadamente en lon -0.x y lat 39.x.
         $looksLikeLonLat = ($x >= -180 && $x <= 180 && $y >= -90 && $y <= 90);
 
         if ($looksLikeLonLat) {
@@ -213,92 +219,163 @@ tr:hover {
     $allStations = [];
     $errorOccurred = false;
     
-       $url = $baseUrl;
-       $ch = curl_init();
-       curl_setopt($ch, CURLOPT_URL, $url);
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       curl_setopt($ch, CURLOPT_HTTPHEADER, ["Accept: application/json"]);
-       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //Desactivar la verificación del certificado SSL. (Solo para desarrollo)
-       $response = curl_exec($ch);
-       if ($response === false) {
-            echo "<p style='color: red; text-align: center;'>Error en cURL: " . curl_error($ch) . "</p>";
-            $errorOccurred = true;
-            die("<p>No hay resultados</p>");
-        }
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if ($httpCode != 200) {
-            echo "<p style='color: red; text-align: center;'>Error en la solicitud a la API (Código HTTP: " . $httpCode . "). URL: " . $url . "</p>";
-            $errorOccurred = true;
-            die("<p>No hay resultados</p>");
-        }
-        curl_close($ch);
-        $data = json_decode($response, true);
-        if ($data === null) {
-            echo "<p style='color: red; text-align: center;'>Error al decodificar la respuesta JSON. Response: " .
-            htmlspecialchars($response) . "</p>"; // Escapa caracteres especiales para seguridad
-            $errorOccurred = true;
-			die("<p>No hay resultados</p>");
-        }
-        if (isset($data["features"]) && is_array($data["features"]) && count($data["features"]) > 0) {
-             foreach ($data["features"] as $station) {
-                 $geometry = normalizeValenbisiGeometry($station['geometry'] ?? []);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $baseUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ["Accept: application/json"]);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    
+    if ($response === false) {
+        echo "<p style='color: red; text-align: center;'>Error en cURL: " . curl_error($ch) . "</p>";
+        $errorOccurred = true;
+        die("<p>No hay resultados</p>");
+    }
+    
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-                 $allStations[$station['attributes']['number']] = [
-                 'address' => $station['attributes']['address'],
-                 'open' => ($station['attributes']['open'] == "T"),
-                 'available' => (int)$station['attributes']['available'],
-                 'free' => (int)$station['attributes']['free'],
-                 'total' => (int)$station['attributes']['total'],
-                 'updated_at' => $station['attributes']['updated_at'],
-                 // Coordenadas listas para pintar en mapas web: Leaflet, Google Maps, Mapbox, etc.
-                 'latitude' => round($geometry['latitude'], 7),
-                 'longitude' => round($geometry['longitude'], 7),
-                 // Mantengo las coordenadas originales por trazabilidad y depuración.
-                 'lon' => $geometry['source_x'],
-                 'lat' => $geometry['source_y']
-             ];
-			}
-			
-		} else {
-			echo "<p style='color: orange; text-align: center;'>No hay resultados en esta página o el formato de la respuesta es incorrecto.</p>";
-			var_dump($data); // Imprime $data para depuración
-			die("<p>No hay resultados</p>");
-		}
+    if ($httpCode != 200) {
+        echo "<p style='color: red; text-align: center;'>Error en la solicitud a la API (Código HTTP: " . $httpCode . ").</p>";
+        $errorOccurred = true;
+        die("<p>No hay resultados</p>");
+    }
+
+    curl_close($ch);
+    
+    $data = json_decode($response, true);
+
+    if ($data === null) {
+        echo "<p style='color: red; text-align: center;'>Error al decodificar la respuesta JSON.</p>";
+        $errorOccurred = true;
+        die("<p>No hay resultados</p>");
+    }
+    
+    if (isset($data["features"]) && is_array($data["features"]) && count($data["features"]) > 0) {
+        foreach ($data["features"] as $station) {
+            $geometry = normalizeValenbisiGeometry($station['geometry'] ?? []);
+
+            $allStations[$station['attributes']['number']] = [
+                'address' => $station['attributes']['address'],
+                'open' => ($station['attributes']['open'] == "T"),
+                'available' => (int)$station['attributes']['available'],
+                'free' => (int)$station['attributes']['free'],
+                'total' => (int)$station['attributes']['total'],
+                'updated_at' => $station['attributes']['updated_at'],
+                'latitude' => round($geometry['latitude'], 7),
+                'longitude' => round($geometry['longitude'], 7),
+                'lon' => $geometry['source_x'],
+                'lat' => $geometry['source_y']
+            ];
+        }
+    } else {
+        echo "<p style='color: orange; text-align: center;'>No hay resultados o formato incorrecto.</p>";
+        die("<p>No hay resultados</p>");
+    }
 	
-	if (!$errorOccurred && !empty($allStations)) { // Usamos !empty() para verificar si $allStations tiene elementos
-			$filePath = getcwd() . '/data.json';
-			if(file_put_contents($filePath, json_encode($allStations))){
-				echo "<p style='color: green; text-align: center;'>Datos guardados en: " . $filePath . "</p>";
-			} else {
-				echo "<p style='color: red; text-align: center;'>Error al guardar el archivo data.json. Verifica los permisos de escritura.</p>";
-			}
-	} elseif (!$errorOccurred && empty($allStations)) {
-			echo "<p style='color: orange; text-align: center;'>No se encontraron datos de estaciones.</p>";
-	}
-	if (!empty($allStations)) {
-			echo "<table>";
-			echo "<tr><th>Dirección</th><th>Número</th><th>Abierto</th><th>Disponibles</th><th>Libres</th><th>Total</th><th>Actualizado</th><th>Latitud</th><th>Longitud</th></tr>";
-			foreach ($allStations as $number => $station) {
-				echo "<tr>";
-				echo "<td><strong>Dirección:</strong> " . htmlspecialchars($station['address']) . "</td>"; // Escapa caracteres especiales
-				echo "<td>" . $number . "</td>";
-				echo "<td>" . ($station['open'] ? "Sí" : "No") . "</td>";
-				echo "<td>" . $station['available'] . "</td>";
-				echo "<td>" . $station['free'] . "</td>";
-				echo "<td>" . $station['total'] . "</td>";
-				echo "<td>" . $station['updated_at'] . "</td>";
-				echo "<td>" . $station['latitude'] . "</td>";
-				echo "<td>" . $station['longitude'] . "</td>";
-				echo "</tr>";
-			}
-	
-			echo "</table>";
-			echo "<div style='text-align: center; margin-top: 20px;'>";
-			echo "    <a href='mapearbicis.php' class='btn-mapa'>Ver Mapa de Estaciones</a>";
-			echo "</div>";
-	}
+    if (!$errorOccurred && !empty($allStations)) {
+        $filePath = getcwd() . '/data.json';
+        file_put_contents($filePath, json_encode($allStations));
+    }
+
+    if (!empty($allStations)) {
+        echo "<table>";
+
+        echo "<thead>";
+        echo "<tr>
+                <th data-key='th-dir'>Dirección</th>
+                <th data-key='th-num'>Número</th>
+                <th data-key='th-abi'>Abierto</th>
+                <th data-key='th-disp'>Disponibles</th>
+                <th data-key='th-lib'>Libres</th>
+                <th data-key='th-tot'>Total</th>
+                <th data-key='th-act'>Actualizado</th>
+                <th data-key='th-lat'>Latitud</th>
+                <th data-key='th-lon'>Longitud</th>
+              </tr>";
+        echo "</thead>";
+
+        echo "<tbody>";
+
+        foreach ($allStations as $number => $station) {
+            $statusTextEs = $station['open'] ? "Sí" : "No";
+            $statusTextEn = $station['open'] ? "Yes" : "No";
+            $statusClass = $station['open'] ? "status-open" : "status-closed";
+            
+            echo "<tr>";
+            echo "<td><strong data-key='lbl-dir'>Dirección:</strong> " . htmlspecialchars($station['address']) . "</td>";
+            echo "<td>" . $number . "</td>";
+            echo "<td class='td-status " . $statusClass . "' data-es='" . $statusTextEs . "' data-en='" . $statusTextEn . "'>" . $statusTextEs . "</td>";
+            echo "<td>" . $station['available'] . "</td>";
+            echo "<td>" . $station['free'] . "</td>";
+            echo "<td>" . $station['total'] . "</td>";
+            echo "<td>" . $station['updated_at'] . "</td>";
+            echo "<td>" . $station['latitude'] . "</td>";
+            echo "<td>" . $station['longitude'] . "</td>";
+            echo "</tr>";
+        }
+
+        echo "</tbody>";
+        echo "</table>";
+		
+        echo "<div class='container-btn'>";
+        echo "    <a href='mapearbicis.php' class='btn-mapa'>Ver Mapa de Estaciones</a>";
+        echo "</div>";
+    }
 ?>
 
+<script>
+function changeLanguage(lang) {
+    const translations = {
+        'es': { 
+            title: "Disponibilidad de ValenBisi", 
+            btn: "Ver Mapa de Estaciones",
+            'th-dir': "Dirección",
+            'th-num': "Número",
+            'th-abi': "Abierto",
+            'th-disp': "Disponibles",
+            'th-lib': "Libres",
+            'th-tot': "Total",
+            'th-act': "Actualizado",
+            'th-lat': "Latitud",
+            'th-lon': "Longitud",
+            'lbl-dir': "Dirección:"
+        },
+        'en': { 
+            title: "ValenBisi Availability", 
+            btn: "View Station Map",
+            'th-dir': "Address",
+            'th-num': "Number",
+            'th-abi': "Open",
+            'th-disp': "Available",
+            'th-lib': "Free",
+            'th-tot': "Total",
+            'th-act': "Updated At",
+            'th-lat': "Latitude",
+            'th-lon': "Longitude",
+            'lbl-dir': "Address:"
+        }
+    };
+
+    document.querySelector('h1').innerText = translations[lang].title;
+    document.querySelector('.btn-mapa').innerText = translations[lang].btn;
+    
+    document.querySelectorAll('table th').forEach(th => {
+        const key = th.getAttribute('data-key');
+
+        if (key && translations[lang][key]) {
+            th.innerText = translations[lang][key];
+        }
+    });
+
+    document.querySelectorAll('strong[data-key="lbl-dir"]').forEach(strong => {
+        strong.innerText = translations[lang]['lbl-dir'] + " ";
+    });
+
+    document.querySelectorAll('.td-status').forEach(td => {
+        td.innerText = td.getAttribute('data-' + lang);
+    });
+}
+</script>
 
 </body>
 </html>

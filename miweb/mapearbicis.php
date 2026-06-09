@@ -52,21 +52,56 @@
             box-shadow: 0 6px 12px rgba(219, 39, 119, 0.3);
             transform: translateY(-2px);
         }
+
+        /* Estilos de botones de idioma */
+        .lang-container {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .btn-lang {
+            background-color: #ffffff;
+            border: 2px solid #db2777;
+            color: #db2777;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+            transition: all 0.2s;
+        }
+
+        .btn-lang:hover {
+            background-color: #db2777;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
 
-<h1>Mapeo de Bicicletas en Valencia</h1>
+<div class="lang-container">
+    <button class="btn-lang" onclick="setLang('es')">Español</button>
+    <button class="btn-lang" onclick="setLang('en')">English</button>
+</div>
+
+<h1 id="main-title">Mapeo de Bicicletas en Valencia</h1>
 
 <div id="map"></div>
 
 <div style="margin-top: 15px;">
-    <a href="index.php" class="btn-volver">Volver al Listado</a>
+    <a href="index.php" id="btn-back" class="btn-volver">Volver al Listado</a>
 </div>
 
 <script>
 // 1. Inicializa el mapa centrado en Valencia
 var map = L.map('map').setView([39.47, -0.37], 13); 
+
+// Variables globales para persistir datos e idioma actual
+var estacionesData = [];
+var currentLang = 'es';
+var markersGroup = L.layerGroup().addTo(map);
 
 // 2. Añade la capa base de OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -88,7 +123,76 @@ function getMarkerColor(available) {
     } 
 } 
 
-// 3. Cargar el archivo data.json
+/**
+ * Renderiza los marcadores en el mapa basándose en el idioma actual
+ */
+function renderMarkers() {
+    markersGroup.clearLayers();
+
+    const labelData = {
+        'es': { 
+            available: "Disponibles", 
+            free: "Libres", 
+            total: "Total" 
+        },
+        'en': { 
+            available: "Available", 
+            free: "Free", 
+            total: "Total" 
+        }
+    };
+
+    estacionesData.forEach(station => {
+        const { lat, lon, address, available, free, total } = station; 
+        
+        if (lat && lon) { 
+            var colorEstacion = getMarkerColor(available);
+
+            L.circleMarker([lat, lon], {
+                color: colorEstacion,
+                fillColor: colorEstacion,
+                fill: true,
+                radius: 8, 
+                fillOpacity: 0.7,
+                weight: 2
+            }) 
+            .bindPopup(` 
+                <strong>${address}</strong><br> 
+                <b>${labelData[currentLang].available}:</b> ${available}<br> 
+                <b>${labelData[currentLang].free}:</b> ${free}<br> 
+                <b>${labelData[currentLang].total}:</b> ${total} 
+            `)
+            .addTo(markersGroup); 
+        } 
+    });
+}
+
+/**
+ * Cambia el idioma global de la UI y los Popups del mapa
+ */
+function setLang(lang) {
+    currentLang = lang;
+
+    const uiTranslations = {
+        'es': { 
+            title: "Mapeo de Bicicletas en Valencia", 
+            backBtn: "Volver al Listado" 
+        },
+        'en': { 
+            title: "Valencia Bike Mapping", 
+            backBtn: "Back to List" 
+        }
+    };
+
+    document.getElementById('main-title').innerText = uiTranslations[lang].title;
+    document.getElementById('btn-back').innerText = uiTranslations[lang].backBtn;
+
+    if (estacionesData.length > 0) {
+        renderMarkers();
+    }
+}
+
+// 3. Cargar el archivo data.json una sola vez al cargar la web
 fetch('data.json') 
     .then(response => { 
         if (!response.ok) { 
@@ -97,29 +201,8 @@ fetch('data.json')
         return response.json(); 
     }) 
     .then(data => { 
-        Object.values(data).forEach(station => {
-            const { lat, lon, address, available, free, total } = station; 
-            
-            if (lat && lon) { 
-                var colorEstacion = getMarkerColor(available);
-
-                L.circleMarker([lat, lon], {
-                    color: colorEstacion,
-                    fillColor: colorEstacion,
-                    fill: true,
-                    radius: 8, 
-                    fillOpacity: 0.7,
-                    weight: 2
-                }) 
-                .addTo(map) 
-                .bindPopup(` 
-                    <strong>${address}</strong><br> 
-                    <b>Disponibles:</b> ${available}<br> 
-                    <b>Libres:</b> ${free}<br> 
-                    <b>Total:</b> ${total} 
-                `); 
-            } 
-        }); 
+        estacionesData = Object.values(data);
+        renderMarkers();
     }) 
     .catch(error => { 
         console.error('Error cargando los datos:', error); 
